@@ -97,10 +97,14 @@ import java.io.*;
         import java.util.Scanner;
 
 public class contacts {
-    private static final String CONTACTS_FILE = "/Users/savannamccauley/IdeaProjects/test/contacts.txt";
+    private static final String CONTACTS_FILE = "/Users/savannamccauley/IdeaProjects/contact-manager-app/src/contacts.txt";
+
     private static HashMap<String, String> names = new HashMap<>();
 
     public static void main(String[] args) {
+        names.put("Savanna", "4156900506");
+        names.put("Auriel", "546456456");
+
         loadContacts();
 
         Scanner scanner = new Scanner(System.in);
@@ -171,7 +175,7 @@ public class contacts {
         } else {
             System.out.println("Name | Phone number\n---------------");
             for (Map.Entry<String, String> entry : names.entrySet()) {
-                System.out.println(entry.getKey() + " | " + entry.getValue());
+                System.out.println(entry.getKey() + " | " + entry.getValue() + " | ");
             }
         }
     }
@@ -184,6 +188,7 @@ public class contacts {
 
         names.put(name, number);
         System.out.println("Contact added.");
+        saveContacts();
     }
 
     private static void search(Scanner scanner) {
@@ -205,5 +210,7 @@ public class contacts {
         } else {
             System.out.println("Contact not found.");
         }
+        saveContacts();
+
     }
 }
