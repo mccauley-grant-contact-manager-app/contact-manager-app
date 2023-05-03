@@ -97,10 +97,19 @@ import java.io.*;
         import java.util.Scanner;
 
 public class contacts {
-    private static final String CONTACTS_FILE = "/Users/savannamccauley/IdeaProjects/test/contacts.txt";
+    private static final String CONTACTS_FILE = "/Users/savannamccauley/IdeaProjects/contact-manager-app/src/contacts.txt";
+
     private static HashMap<String, String> names = new HashMap<>();
 
     public static void main(String[] args) {
+<<<<<<< HEAD
+=======
+        names.put("Savanna", "4156900506");
+        names.put("Auriel", "546456456");
+
+        loadContacts();
+
+>>>>>>> a7d0e0313974acba5f175dcda831dc70cac49460
         Scanner scanner = new Scanner(System.in);
         int option = 0;
 
@@ -191,8 +200,13 @@ public class contacts {
             System.out.println("You have no contacts.");
         } else {
             System.out.println("Name | Phone number\n---------------");
+<<<<<<< HEAD
             for (Map.Entry<String, String> entry : contacts.names.entrySet()) {
                 System.out.println(entry.getKey() + " | " + entry.getValue());
+=======
+            for (Map.Entry<String, String> entry : names.entrySet()) {
+                System.out.println(entry.getKey() + " | " + entry.getValue() + " | ");
+>>>>>>> a7d0e0313974acba5f175dcda831dc70cac49460
             }
         }
     }
@@ -214,10 +228,16 @@ public class contacts {
 
             bw.close();
 
+<<<<<<< HEAD
             System.out.println("Contact added successfully.");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+=======
+        names.put(name, number);
+        System.out.println("Contact added.");
+        saveContacts();
+>>>>>>> a7d0e0313974acba5f175dcda831dc70cac49460
     }
 
 
@@ -240,5 +260,7 @@ public class contacts {
         } else {
             System.out.println("Contact not found.");
         }
+        saveContacts();
+
     }
 }
