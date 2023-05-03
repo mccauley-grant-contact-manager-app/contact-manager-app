@@ -175,7 +175,9 @@ public class contacts {
         } else {
             System.out.println("Name | Phone number\n---------------");
             for (Map.Entry<String, String> entry : names.entrySet()) {
-                System.out.println(entry.getKey() + " | " + entry.getValue() + " | ");
+                String phoneNumber = entry.getValue();
+                String formattedPhoneNumber = phoneNumber.substring(0,3)+ "-" + phoneNumber.substring(3,6)+ "-" + phoneNumber.substring(6);
+                System.out.println(entry.getKey() + " | " + formattedPhoneNumber + " | ");
             }
         }
     }
