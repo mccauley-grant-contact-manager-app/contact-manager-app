@@ -109,15 +109,15 @@ public class contacts {
             System.out.println("Name | Phone number\n---------------");
 
 
-                String phoneNumber = entry.getValue();
-                String formattedPhoneNumber = phoneNumber.substring(0,3)+ "-" + phoneNumber.substring(3,6)+ "-" + phoneNumber.substring(6);
-                System.out.println(entry.getKey() + " | " + formattedPhoneNumber + " | ");
+            String phoneNumber = entry.getValue();
+            String formattedPhoneNumber = phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6);
+            System.out.println(entry.getKey() + " | " + formattedPhoneNumber + " | ");
 
 
-
-            }
         }
     }
+
+}
 
     private static void add(Scanner scanner, HashMap<String, String> names) {
         System.out.print("Enter the name of the new contact: ");
