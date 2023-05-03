@@ -11,8 +11,6 @@ public class contacts {
     private static HashMap<String, String> names = new HashMap<>();
 
     public static void main(String[] args) {
-        names.put("Savanna", "4156900506");
-        names.put("Auriel", "546456456");
 
         loadContacts();
 
@@ -20,7 +18,7 @@ public class contacts {
         int option = 0;
 
         while (option != 5) {
-            System.out.println("Main Menu\n---------\n1. View contacts\n2. Add a new contact\n3. Search a contact by name\n4. Delete an existing contact\n5. Exit\nEnter an option (1, 2, 3, 4, or 5):");
+            System.out.println("Main Menu\n--------------------------\n1. View contacts\n2. Add a new contact\n3. Search a contact by name\n4. Delete an existing contact\n5. Exit\nEnter an option (1, 2, 3, 4, or 5):");
             option = scanner.nextInt();
             scanner.nextLine();
             switch (option) {
@@ -82,11 +80,13 @@ public class contacts {
         if (names.isEmpty()) {
             System.out.println("You have no contacts.");
         } else {
-            System.out.println("Name | Phone number\n---------------");
+            System.out.printf("%-10s |%-13s |%n","Name","Phone Number");
+            System.out.println("---------------------------");
             for (Map.Entry<String, String> entry : names.entrySet()) {
                 String phoneNumber = entry.getValue();
                 String formattedPhoneNumber = phoneNumber.substring(0,3)+ "-" + phoneNumber.substring(3,6)+ "-" + phoneNumber.substring(6);
-                System.out.println(entry.getKey() + " | " + formattedPhoneNumber + " | ");
+//                System.out.println(entry.getKey() + " | " + formattedPhoneNumber + " | ");
+                System.out.printf("%-10s | %-10s | %n", entry.getKey(), formattedPhoneNumber);
             }
         }
     }
@@ -94,13 +94,30 @@ public class contacts {
     private static void add(Scanner scanner) {
         System.out.print("Enter name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter phone number: ");
-        String number = scanner.nextLine();
 
+        if (names.containsKey(name)){
+            System.out.println("There is already a contact named " + name + " would you like to over write it Yes/No");
+            String overWrite = scanner.nextLine();
+            if (overWrite.equalsIgnoreCase("yes")) {
+                System.out.println("Enter a new name");
+                String newName = scanner.nextLine();
+                System.out.print("Enter phone number: ");
+                String newNumber = scanner.nextLine();
+                names.replace(newName, newNumber);
+                saveContacts();
+
+
+            }else{
+                viewContacts();
+                System.out.println("Here are all of the current contacts");
+            }
+        }else{
+            System.out.print("Enter phone number: ");
+            String number = scanner.nextLine();
         names.put(name, number);
         System.out.println("Contact added.");
         saveContacts();
-    }
+    }}
 
     private static void search(Scanner scanner) {
         System.out.print("Enter name to search: ");
