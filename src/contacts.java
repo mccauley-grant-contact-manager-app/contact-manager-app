@@ -102,13 +102,34 @@ public class contacts {
     private static HashMap<String, String> names = new HashMap<>();
 
     public static void main(String[] args) {
+<<<<<<< HEAD
+=======
         names.put("Savanna", "4156900506");
         names.put("Auriel", "546456456");
 
         loadContacts();
 
+>>>>>>> a7d0e0313974acba5f175dcda831dc70cac49460
         Scanner scanner = new Scanner(System.in);
         int option = 0;
+
+        HashMap<String, String> names = new HashMap<>();
+        try {
+            BufferedReader br = new BufferedReader(
+                    new FileReader("contacts.txt"));
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                String name = parts[0];
+                String phoneNumber = parts[1];
+                names.put(name, phoneNumber);
+            }
+
+            br.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         while (option != 5) {
             System.out.println("Main Menu\n---------\n1. View contacts\n2. Add a new contact\n3. Search a contact by name\n4. Delete an existing contact\n5. Exit\nEnter an option (1, 2, 3, 4, or 5):");
@@ -116,16 +137,16 @@ public class contacts {
             scanner.nextLine();
             switch (option) {
                 case 1:
-                    viewContacts();
+                    viewContacts(names);
                     break;
                 case 2:
-                    add(scanner);
+                    add(scanner, names);
                     break;
                 case 3:
-                    search(scanner);
+                    search(scanner, names);
                     break;
                 case 4:
-                    deleteContact(scanner);
+                    deleteContact(scanner, names);
                     break;
                 case 5:
                     break;
@@ -133,9 +154,14 @@ public class contacts {
                     System.out.println("Try again");
             }
         }
-
-        saveContacts();
     }
+
+
+//    void saveContacts() {
+//
+//    }
+//
+//}
 
     private static void loadContacts() {
         try {
@@ -169,43 +195,67 @@ public class contacts {
         }
     }
 
-    private static void viewContacts() {
-        if (names.isEmpty()) {
+    private static void viewContacts(HashMap<String, String> names) {
+        if (contacts.names.isEmpty()) {
             System.out.println("You have no contacts.");
         } else {
             System.out.println("Name | Phone number\n---------------");
+<<<<<<< HEAD
+            for (Map.Entry<String, String> entry : contacts.names.entrySet()) {
+                System.out.println(entry.getKey() + " | " + entry.getValue());
+=======
             for (Map.Entry<String, String> entry : names.entrySet()) {
                 System.out.println(entry.getKey() + " | " + entry.getValue() + " | ");
+>>>>>>> a7d0e0313974acba5f175dcda831dc70cac49460
             }
         }
     }
 
-    private static void add(Scanner scanner) {
-        System.out.print("Enter name: ");
+    private static void add(Scanner scanner, HashMap<String, String> names) {
+        System.out.print("Enter the name of the new contact: ");
         String name = scanner.nextLine();
-        System.out.print("Enter phone number: ");
-        String number = scanner.nextLine();
+        System.out.print("Enter the phone number of the new contact: ");
+        String phoneNumber = scanner.nextLine();
+        contacts.names.put(name, phoneNumber);
 
+        try {
+            BufferedWriter bw = new BufferedWriter(
+                    new FileWriter("contacts.txt"));
+
+            for (Map.Entry<String, String> entry : contacts.names.entrySet()) {
+                bw.write(entry.getKey() + "," + entry.getValue() + "\n");
+            }
+
+            bw.close();
+
+<<<<<<< HEAD
+            System.out.println("Contact added successfully.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+=======
         names.put(name, number);
         System.out.println("Contact added.");
         saveContacts();
+>>>>>>> a7d0e0313974acba5f175dcda831dc70cac49460
     }
 
-    private static void search(Scanner scanner) {
+
+    private static void search(Scanner scanner, HashMap<String, String> names) {
         System.out.print("Enter name to search: ");
         String name = scanner.nextLine();
-        if (names.containsKey(name)) {
-            System.out.println("Phone number: " + names.get(name));
+        if (contacts.names.containsKey(name)) {
+            System.out.println("Phone number: " + contacts.names.get(name));
         } else {
             System.out.println("Contact not found.");
         }
     }
 
-    private static void deleteContact(Scanner scanner) {
+    private static void deleteContact(Scanner scanner, HashMap<String, String> names) {
         System.out.print("Enter name to delete: ");
         String name = scanner.nextLine();
-        if (names.containsKey(name)) {
-            names.remove(name);
+        if (contacts.names.containsKey(name)) {
+            contacts.names.remove(name);
             System.out.println("Contact deleted.");
         } else {
             System.out.println("Contact not found.");
